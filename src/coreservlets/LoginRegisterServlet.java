@@ -10,10 +10,10 @@ import javax.servlet.http.*;
 public class LoginRegisterServlet extends HttpServlet {
     private final String REGISTER = "Register";
     private final String LOGIN = "Login";
-    private final String CURRENT_JSP_PAGE = "/MyPage/LoginRegister.jsp";
-    private final String REGISTER_JSP_PAGE = "/MyPage/Register.jsp";
-    private final String LOGIN_SUCCESS_JSP_PAGE = "/books_display_servlet";
-    private final String LOGIN_FAIL_JSP_PAGE = "/MyPage/LoginFail.jsp";
+    private final String CURRENT_PAGE = "/MyPage/LoginRegister.jsp";
+    private final String REGISTER_PAGE = "/MyPage/Register.jsp";
+    private final String LOGIN_SUCCESS_PAGE = "/books_display_servlet";
+    private final String LOGIN_FAIL_PAGE = "/MyPage/LoginFail.jsp";
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,9 +49,9 @@ public class LoginRegisterServlet extends HttpServlet {
             case REGISTER:
                 if (isValid1 && isValid2) {
                     register(dataBase, user);
-                    dispatcher = request.getRequestDispatcher(REGISTER_JSP_PAGE);
+                    dispatcher = request.getRequestDispatcher(REGISTER_PAGE);
                 } else {
-                    dispatcher = request.getRequestDispatcher(CURRENT_JSP_PAGE);
+                    dispatcher = request.getRequestDispatcher(CURRENT_PAGE);
                 }
                 break;
             case LOGIN:
@@ -60,9 +60,9 @@ public class LoginRegisterServlet extends HttpServlet {
                     // session-based bean sharing mechanics
                     HttpSession session = request.getSession();
                     session.setAttribute("userBean", user);
-                    dispatcher = request.getRequestDispatcher(LOGIN_SUCCESS_JSP_PAGE);
+                    dispatcher = request.getRequestDispatcher(LOGIN_SUCCESS_PAGE);
                 } else {
-                    dispatcher = request.getRequestDispatcher(LOGIN_FAIL_JSP_PAGE);
+                    dispatcher = request.getRequestDispatcher(LOGIN_FAIL_PAGE);
                 }
                 break;
         }

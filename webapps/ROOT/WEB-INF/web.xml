@@ -71,4 +71,26 @@
    <url-pattern>/purchase_book_servlet</url-pattern>
   </servlet-mapping>
 
+  <!-- AddBookServlet -->
+  <servlet>
+   <servlet-name>AddBookServlet</servlet-name>
+   <servlet-class>coreservlets.AddBookServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+   <servlet-name>AddBookServlet</servlet-name>
+   <url-pattern>/add_book_servlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- DeleteBookServlet -->
+  <servlet>
+   <servlet-name>DeleteBookServlet</servlet-name>
+   <servlet-class>coreservlets.DeleteBookServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+   <servlet-name>DeleteBookServlet</servlet-name>
+   <url-pattern>/delete_book_servlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>

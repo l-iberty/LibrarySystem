@@ -8,8 +8,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class CheckBookServlet extends HttpServlet {
-    private final String CHECKBOOK_JSP_PAGE = "/MyPage/CheckBook.jsp";
-    private final String CURRENT_JSP_PAGE = "/MyPage/LoginSuccess.jsp";
+    private final String CHECKBOOK_PAGE = "/MyPage/CheckBook.jsp";
+    private final String CURRENT_PAGE = "/MyPage/LoginSuccess.jsp";
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +32,7 @@ public class CheckBookServlet extends HttpServlet {
             books = helper.getBookList(result);
             bookEntries.setEntries(helper.getDetailedInfo(books));
 
-            dispatcher = request.getRequestDispatcher(CHECKBOOK_JSP_PAGE);
+            dispatcher = request.getRequestDispatcher(CHECKBOOK_PAGE);
         }
 
         if (keyvalue != null && !keyvalue.trim().equals("") &&
@@ -53,11 +53,11 @@ public class CheckBookServlet extends HttpServlet {
                     bookEntries.setEntries(helper.getBasicInfo(books));
                     break;
             }
-            dispatcher = request.getRequestDispatcher(CHECKBOOK_JSP_PAGE);
+            dispatcher = request.getRequestDispatcher(CHECKBOOK_PAGE);
         }
 
         if (dispatcher == null) {
-            dispatcher = request.getRequestDispatcher(CURRENT_JSP_PAGE);
+            dispatcher = request.getRequestDispatcher(CURRENT_PAGE);
         }
 
         session.setAttribute("bookEntries2", bookEntries);

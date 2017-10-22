@@ -8,8 +8,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class PurchaseBookServlet extends HttpServlet {
-    private final String PURCHASE_OK_JSP_PAGE = "/MyPage/PurchaseOk.jsp";
-    private final String PURCHASE_FAIL_JSP_PAGE = "/MyPage/PurchaseFail.jsp";
+    private final String PURCHASE_OK_PAGE = "/MyPage/PurchaseOk.jsp";
+    private final String PURCHASE_FAIL_PAGE = "/MyPage/PurchaseFail.jsp";
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,10 +30,10 @@ public class PurchaseBookServlet extends HttpServlet {
         if (book != null) {
             HttpSession session = request.getSession();
             session.setAttribute("book", book);
-            dispatcher = request.getRequestDispatcher(PURCHASE_OK_JSP_PAGE);
+            dispatcher = request.getRequestDispatcher(PURCHASE_OK_PAGE);
             dispatcher.forward(request, response);
         } else {
-            dispatcher = request.getRequestDispatcher(PURCHASE_FAIL_JSP_PAGE);
+            dispatcher = request.getRequestDispatcher(PURCHASE_FAIL_PAGE);
             dispatcher.forward(request, response);
         }
     }

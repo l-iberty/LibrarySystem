@@ -12,6 +12,6 @@
 	<li><b>...</b></li>
 </ul>
 <br><hr>
-<a href="/MyPage/LoginSuccess.jsp">Go Bank</a>
+<a href="/MyPage/LoginSuccess.jsp">Go back</a>
 </body>
 </html>

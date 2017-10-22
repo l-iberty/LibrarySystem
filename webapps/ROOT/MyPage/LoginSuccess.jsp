@@ -19,6 +19,6 @@
 	}
 %>
 <jsp:include page="<%= dest %>"/>
-<br><a href="/MyPage/LoginRegister.jsp">Go Bank</a>
+<br><a href="/MyPage/LoginRegister.jsp">Go back</a>
 </body>
 </html>

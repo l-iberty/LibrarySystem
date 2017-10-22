@@ -1,7 +1,8 @@
 package coreservlets.util;
 
-import coreservlets.Book;
+import coreservlets.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 public class BookHelper {
@@ -58,5 +59,14 @@ public class BookHelper {
             builder.append(s);
         }
         return builder.toString();
+    }
+
+    public void informDisplay(HttpSession session, DataBase dataBase) {
+        Map<String, Map<String, Object>> result =
+                dataBase.query("book", "*", null);
+        List<Book> books = getBookList(result);
+        BookEntries bookEntries = new BookEntries();
+        bookEntries.setEntries(getBasicInfo(books));
+        session.setAttribute("bookEntries", bookEntries);
     }
 }

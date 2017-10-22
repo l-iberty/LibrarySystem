@@ -11,6 +11,6 @@
 </h3>
 <h4>Total cost: $<jsp:getProperty name="book" property="totalCost" /></h4>
 <br><hr>
-<a href="/MyPage/LoginSuccess.jsp">Go Bank</a>
+<a href="/MyPage/LoginSuccess.jsp">Go back</a>
 </body>
 </html>
