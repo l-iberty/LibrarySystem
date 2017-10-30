@@ -90,6 +90,6 @@ public class LoginRegisterServlet extends HttpServlet {
                                 "type=" + user.getType() +
                                 ")");
         //System.out.println(result.get(user.getName()));
-        return !result.isEmpty();
+        return result != null && !result.isEmpty();
     }
 }

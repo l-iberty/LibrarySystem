@@ -18,14 +18,18 @@ public class DeleteBookServlet extends HttpServlet {
 
         String id = request.getParameter("id");
         if (id != null && !id.trim().equals("")) {
-            dataBase.delete("book", "id=\'" + id + "\'");
-            // 动态修改 LoginSuccess.jsp 页面的图书列表
-            new BookHelper().informDisplay(request.getSession(), dataBase);
-            dispatcher = request.getRequestDispatcher(DELBOOK_OK_PAGE);
-            dispatcher.forward(request, response);
-        } else {
-            dispatcher = request.getRequestDispatcher(DELBOOK_FAIL_PAGE);
-            dispatcher.forward(request, response);
+            if (!dataBase.query("book", "*", "id=\'" + id + "\'").isEmpty()) {
+                dataBase.delete("book", "id=\'" + id + "\'");
+                // 动态修改 LoginSuccess.jsp 页面的图书列表
+                new BookHelper().informDisplay(request.getSession(), dataBase);
+                dispatcher = request.getRequestDispatcher(DELBOOK_OK_PAGE);
+                dispatcher.forward(request, response);
+                return;
+            }
         }
+
+        dispatcher = request.getRequestDispatcher(DELBOOK_FAIL_PAGE);
+        dispatcher.forward(request, response);
+
     }
 }

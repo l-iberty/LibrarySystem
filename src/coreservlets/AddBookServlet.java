@@ -31,6 +31,12 @@ public class AddBookServlet extends HttpServlet {
             return;
         }
 
+        if (price <= 0.0 || numItems <= 0.0) {
+            dispatcher = request.getRequestDispatcher(ADDBOOK_FAIL_PAGE);
+            dispatcher.forward(request, response);
+            return;
+        }
+
         dataBase.insert("book",
                 "(id,name,author,price,numItems,numSales)",
                 "(\'" + id + "\'," +

@@ -13,7 +13,7 @@
 	<tr><th>Delete Book</th></tr>
 </table>
 <form action="/delete_book_servlet">
-	Which one do you wanna delete?
+	Which one do you wanna delete? (ID)
 	<input type="text" name="id" id="id"><br><br>
 	<input type="submit" value="Delete it">
 </form>

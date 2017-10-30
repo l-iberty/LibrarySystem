@@ -9,7 +9,10 @@ create table book (
 	price numeric,
 	numItems int,
 	numSales int,
-	primary key(id)
+	primary key(id),
+	check (price >= 0),
+	check (numItems >= 0),
+	check (numSales >= 0)
 );
 
 create table user (

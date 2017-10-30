@@ -19,7 +19,7 @@ public class CheckBookServlet extends HttpServlet {
         String keyvalue = request.getParameter("keyvalue");
 
         DataBase dataBase = new DataBase("root", "2015Liberty", "localhost", "library");
-        Map<String, Map<String, Object>> result;
+        Map<String, Map<String, Object>> result = null;
         List<Book> books;
         BookHelper helper = new BookHelper();
         BookEntries bookEntries = new BookEntries();
@@ -29,9 +29,12 @@ public class CheckBookServlet extends HttpServlet {
 
         if (id != null && !id.trim().equals("")) {
             result = dataBase.query("book", "*", "id=\'" + id + "\'");
-            books = helper.getBookList(result);
-            bookEntries.setEntries(helper.getDetailedInfo(books));
-
+            if (!result.isEmpty()) {
+                books = helper.getBookList(result);
+                bookEntries.setEntries(helper.getDetailedInfo(books));
+            } else {
+                bookEntries.setEntries("No books found!");
+            }
             dispatcher = request.getRequestDispatcher(CHECKBOOK_PAGE);
         }
 
@@ -42,16 +45,18 @@ public class CheckBookServlet extends HttpServlet {
                     result = dataBase.query("book",
                             "*",
                             "name=\'" + keyvalue + "\'");
-                    books = helper.getBookList(result);
-                    bookEntries.setEntries(helper.getBasicInfo(books));
                     break;
                 case "author":
                     result = dataBase.query("book",
                             "*",
                             "author=\'" + keyvalue + "\'");
-                    books = helper.getBookList(result);
-                    bookEntries.setEntries(helper.getBasicInfo(books));
                     break;
+            }
+            if (result != null && !result.isEmpty()) {
+                books = helper.getBookList(result);
+                bookEntries.setEntries(helper.getBasicInfo(books));
+            } else {
+                bookEntries.setEntries("No books found!");
             }
             dispatcher = request.getRequestDispatcher(CHECKBOOK_PAGE);
         }
