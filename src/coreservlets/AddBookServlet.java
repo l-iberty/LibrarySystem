@@ -47,7 +47,7 @@ public class AddBookServlet extends HttpServlet {
                         numSales + ")");
 
         // 动态修改 LoginSuccess.jsp 页面的图书列表
-        new BookHelper().informDisplay(request.getSession(), dataBase);
+        new BookManager().informDisplay(request.getSession(), dataBase);
 
         dispatcher = request.getRequestDispatcher(ADDBOOK_OK_PAGE);
         dispatcher.forward(request, response);

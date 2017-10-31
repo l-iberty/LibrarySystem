@@ -4,11 +4,11 @@
 	<title>Login Success</title>
 </head>
 <body>
-<jsp:useBean id="bookEntries" type="coreservlets.BookEntries" scope="session"/>
+<jsp:useBean id="bookManager" type="coreservlets.BookManager" scope="session"/>
 <jsp:useBean id="userBean" type="coreservlets.User" scope="session"/>
 <h3>Welcome, <jsp:getProperty name="userBean" property="name"/>!<br>
 	All books are as follow:</h3>
-<jsp:getProperty name="bookEntries" property="entries"/><br><hr>
+<jsp:getProperty name="bookManager" property="entries"/><br><hr>
 <%@ page import="coreservlets.util.*" %>
 <%
 	String dest;

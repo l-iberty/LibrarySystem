@@ -21,8 +21,7 @@ public class CheckBookServlet extends HttpServlet {
         DataBase dataBase = new DataBase("root", "2015Liberty", "localhost", "library");
         Map<String, Map<String, Object>> result = null;
         List<Book> books;
-        BookHelper helper = new BookHelper();
-        BookEntries bookEntries = new BookEntries();
+        BookManager bookManager=new BookManager();
 
         HttpSession session = request.getSession();
         RequestDispatcher dispatcher = null;
@@ -30,10 +29,10 @@ public class CheckBookServlet extends HttpServlet {
         if (id != null && !id.trim().equals("")) {
             result = dataBase.query("book", "*", "id=\'" + id + "\'");
             if (!result.isEmpty()) {
-                books = helper.getBookList(result);
-                bookEntries.setEntries(helper.getDetailedInfo(books));
+                books = bookManager.getBookList(result);
+                bookManager.setEntries(bookManager.getDetailedInfo(books));
             } else {
-                bookEntries.setEntries("No books found!");
+                bookManager.setEntries("No books found!");
             }
             dispatcher = request.getRequestDispatcher(CHECKBOOK_PAGE);
         }
@@ -53,10 +52,10 @@ public class CheckBookServlet extends HttpServlet {
                     break;
             }
             if (result != null && !result.isEmpty()) {
-                books = helper.getBookList(result);
-                bookEntries.setEntries(helper.getBasicInfo(books));
+                books = bookManager.getBookList(result);
+                bookManager.setEntries(bookManager.getBasicInfo(books));
             } else {
-                bookEntries.setEntries("No books found!");
+                bookManager.setEntries("No books found!");
             }
             dispatcher = request.getRequestDispatcher(CHECKBOOK_PAGE);
         }
@@ -65,7 +64,7 @@ public class CheckBookServlet extends HttpServlet {
             dispatcher = request.getRequestDispatcher(CURRENT_PAGE);
         }
 
-        session.setAttribute("bookEntries2", bookEntries);
+        session.setAttribute("bookManager2", bookManager);
         dispatcher.forward(request, response);
     }
 }

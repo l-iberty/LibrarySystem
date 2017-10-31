@@ -50,8 +50,8 @@ public class PurchaseBookServlet extends HttpServlet {
                 dataBase.query("book",
                         "*",
                         "name=\'" + name + "\'");
-        BookHelper helper = new BookHelper();
-        List<Book> books = helper.getBookList(result);
+        BookManager bookManager = new BookManager();
+        List<Book> books = bookManager.getBookList(result);
         if (books.isEmpty()) {
             System.out.println("\nEmpty result");
             return null;

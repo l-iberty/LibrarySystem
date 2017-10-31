@@ -4,9 +4,9 @@
 	<title>Books Information</title>
 </head>
 <body>
-<jsp:useBean id="bookEntries2" type="coreservlets.BookEntries" scope="session"/>
+<jsp:useBean id="bookManager2" type="coreservlets.BookManager" scope="session"/>
 <h3>Books Information:</h3>
-<jsp:getProperty name="bookEntries2" property="entries"/><br><hr>
+<jsp:getProperty name="bookManager2" property="entries"/><br><hr>
 <a href="/MyPage/LoginSuccess.jsp">Go back</a>
 </body>
 </html>

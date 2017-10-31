@@ -14,7 +14,7 @@ public class BooksDisplayServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DataBase dataBase = new DataBase("root", "2015Liberty", "localhost", "library");
-        new BookHelper().informDisplay(request.getSession(), dataBase);
+        new BookManager().informDisplay(request.getSession(), dataBase);
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(BOOK_DISPLAY_PAGE);
         dispatcher.forward(request, response);
