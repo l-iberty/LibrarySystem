@@ -30,6 +30,9 @@ public class PurchaseBookServlet extends HttpServlet {
         if (book != null) {
             HttpSession session = request.getSession();
             session.setAttribute("book", book);
+            User user = (User) session.getAttribute("userBean");
+            // 添加交易记录
+            addTradeRecord(user, book);
             dispatcher = request.getRequestDispatcher(PURCHASE_OK_PAGE);
             dispatcher.forward(request, response);
         } else {
@@ -73,5 +76,15 @@ public class PurchaseBookServlet extends HttpServlet {
                 "name=\'" + book.getName() + "\'");
 
         return book;
+    }
+
+    private void addTradeRecord(User user, Book book) {
+        DataBase dataBase = new DataBase("root", "2015Liberty", "localhost", "library");
+        dataBase.insert("trade_record",
+                "(userName,bookName,numBooks)",
+                "(" +
+                        "\'" + user.getName() + "\'," +
+                        "\'" + book.getName() + "\'," +
+                        book.getNumPurchase() + ")");
     }
 }

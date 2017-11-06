@@ -22,6 +22,15 @@ create table user (
 	primary key(name)
 );
 
+/* 交易记录 */
+create table trade_record (
+	id int auto_increment, /* 交易号 */
+	userName varchar(20) not null,
+	bookName varchar(20) not null,
+	numBooks int not null,
+	primary key(id)
+);
+
 insert into book (id,name,author,price,numItems,numSales) values ('A1234','Computer NetWork','Keith W.Rose',66,100,234);
 insert into book (id,name,author,price,numItems,numSales) values ('B1234','Thinking in Java','Bruce Eckel',108,12,145);
 insert into book (id,name,author,price,numItems,numSales) values ('C1234','Digital Design','John F.Wakerly',79,56,122);
