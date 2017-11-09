@@ -27,12 +27,20 @@ public class PurchaseBookServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         Book book = purchase(name, numPurchase);
+        HttpSession session = request.getSession();
         if (book != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("book", book);
+            // 当前登录用户
             User user = (User) session.getAttribute("userBean");
+
             // 添加交易记录
-            addTradeRecord(user, book);
+            TradeRecord tradeRecord = new TradeRecord();
+            tradeRecord.setUserName(user.getName());
+            tradeRecord.setBookName(book.getName());
+            tradeRecord.setCost(book.getPrice());
+            tradeRecord.setNumBooks(numPurchase);
+            addTradeRecord(tradeRecord);
+
+            session.setAttribute("tradeRecordBean", tradeRecord);
             dispatcher = request.getRequestDispatcher(PURCHASE_OK_PAGE);
             dispatcher.forward(request, response);
         } else {
@@ -41,7 +49,8 @@ public class PurchaseBookServlet extends HttpServlet {
         }
     }
 
-    private Book purchase(String name, int numPurchase) {
+    // 需在 Test.java 中测试该函数，故声明为 public
+    public Book purchase(String name, int numPurchase) {
         if (name == null || name.trim().equals("") ||
                 numPurchase <= 0) {
             System.out.println("\nBad arguments");
@@ -66,7 +75,6 @@ public class PurchaseBookServlet extends HttpServlet {
             return null;
         }
 
-        book.setNumPurchase(numPurchase);
         book.setNumSalesIncrement(numPurchase);
         book.setNumItemsIncrement(-numPurchase);
 
@@ -78,13 +86,13 @@ public class PurchaseBookServlet extends HttpServlet {
         return book;
     }
 
-    private void addTradeRecord(User user, Book book) {
+    // 需在 Test.java 中测试该函数，故声明为 public
+    public void addTradeRecord(TradeRecord tradeRecord) {
         DataBase dataBase = new DataBase("root", "2015Liberty", "localhost", "library");
         dataBase.insert("trade_record",
-                "(userName,bookName,numBooks)",
-                "(" +
-                        "\'" + user.getName() + "\'," +
-                        "\'" + book.getName() + "\'," +
-                        book.getNumPurchase() + ")");
+                "(userName,bookName,cost,numBooks)",
+                "(\'" + tradeRecord.getUserName() + "\'," +
+                        "\'" + tradeRecord.getBookName() + "\'," +
+                        tradeRecord.getCost() + "," + tradeRecord.getNumBooks() + ")");
     }
 }

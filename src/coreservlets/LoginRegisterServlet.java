@@ -71,7 +71,8 @@ public class LoginRegisterServlet extends HttpServlet {
         }
     }
 
-    private void register(DataBase dataBase, User user) {
+    // 需在 Test.java 中测试该函数，故声明为 public
+    public void register(DataBase dataBase, User user) {
         dataBase.insert("user",
                 "(name,passwd,type)",
                 "(" +
@@ -81,7 +82,8 @@ public class LoginRegisterServlet extends HttpServlet {
                         ")");
     }
 
-    private boolean checkLogin(DataBase dataBase, User user) {
+    // 需在 Test.java 中测试该函数，故声明为 public
+    public boolean checkLogin(DataBase dataBase, User user) {
         Map<String, Map<String, Object>> result =
                 dataBase.query("user", "*",
                         "(" +

@@ -27,6 +27,7 @@ create table trade_record (
 	id int auto_increment, /* 交易号 */
 	userName varchar(20) not null,
 	bookName varchar(20) not null,
+	cost numeric not null,
 	numBooks int not null,
 	primary key(id)
 );

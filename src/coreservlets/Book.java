@@ -7,7 +7,6 @@ public class Book {
     private double price = 0.0;
     private int numItems = 0; // 库存
     private int numSales = 0; // 销量
-    private int numPurchase = 0; // 顾客的购买数量，用于通过 bean 进行的信息传递
 
     public String getId() {
         return id;
@@ -31,14 +30,6 @@ public class Book {
 
     public double getPrice() {
         return price;
-    }
-
-    public int getNumPurchase() {
-        return numPurchase;
-    }
-
-    public double getTotalCost() {
-        return numPurchase * price;
     }
 
     public void setId(String id) {
@@ -73,7 +64,4 @@ public class Book {
         this.numSales += increment;
     }
 
-    public void setNumPurchase(int numPurchase) {
-        this.numPurchase = numPurchase;
-    }
 }
